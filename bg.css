@@ -1,0 +1,14 @@
+.usr-1{
+
+}
+.usr-1 .main-bg {
+
+	position: absolute;
+	z-index: -1;
+	background-image: url('background_1.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	opacity: 0.4;
+	width: 100%;
+	height: 100%;
+}
