@@ -1,13 +1,8 @@
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-
+   
     <title>Taiwan Voice</title>
 
     <!-- Bootstrap core CSS -->
@@ -16,6 +11,8 @@
 
     <!-- Custom styles for this template -->
     <link href="product.css" rel="stylesheet">
+    
+    <script src="./js/record-live-audio.js"></script>
   </head>
 
   <body class="usr-1">
@@ -38,8 +35,8 @@
     <div class="main-bg"></div>
     <div class="overflow-hidden p-3 p-md-5 text-center" id="main-recorder" style="height: 100%;">
       <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal" style="font-size: 2.5rem;">台聲語音-臺灣之聲</h1>
-        <p class="lead font-weight-normal">請按下"record"開始錄音,按下"stop"停止錄音並辨識</p>
+        <h1 class="display-4 font-weight-normal" style="font-size: 2.5rem; font-family: Microsoft JhengHei;">台聲語音-臺灣之聲</h1>
+        <p id="info_start" >請按下"record"開始錄音,按下"stop"停止錄音並辨識</p>
         <form id="output-result" role="form">
           <div class="form-group">
             <textarea id="outputSentence" class="form-control" rows="5" name="sentence">辨識結果</textarea>
