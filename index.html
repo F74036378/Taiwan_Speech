@@ -7,44 +7,65 @@
 
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./bg.css">
+    <link rel="stylesheet" type="text/css" href="./css/bg.css">
 
     <!-- Custom styles for this template -->
-    <link href="product.css" rel="stylesheet">
+    <link href="./css/product.css" rel="stylesheet">
     
-    <!--<script src="./js/record-live-audio.js"></script>-->
   </head>
 
+  <script src="./js/record-live-audio.js"></script>
   <script type="text/javascript">
     var bg_num = 0;
     var bg_opacity = 80;
     var bg_interval = -1;
     var bg_element;
     var bg_interval_element;
-    var i;
+    var bg_stay_element;
+    var i, bg_stay_count;
+    var bg_total_num;
 
     window.onload = function(){
+        bg_onload();
+        record_init();
+    }
+
+    function bg_onload(){
+      bg_total_num = 4;
+      bg_stay_count = 0;
       bg_element = document.getElementById('bg_div');
-      console.log(bg_element.style);
-      bg_interval_element = setInterval(bg_change, 25);
+      //console.log(bg_element.style);
+      bg_interval_element = setInterval(bg_change, 15);
     }
 
     function bg_change(){
-      if(bg_interval < 0){
-        bg_opacity = bg_opacity + bg_interval*0.5;
-
-        if(bg_opacity <= 0){
-          bg_num = bg_num + 1;
-          bg_interval = 1;
+      if(bg_stay_count >= 1){
+        bg_stay_count = bg_stay_count +1;
+        if(bg_stay_count >= 500){
+          bg_stay_count = 0;
         }
       }else{
-        bg_opacity = bg_opacity + bg_interval*0.5;
-        if(bg_opacity >= 80){
-          bg_interval = -1;
+        if(bg_interval < 0){
+          bg_opacity = bg_opacity + bg_interval*0.5;
+  
+          if(bg_opacity <= 0){
+            bg_num = bg_num + 1;
+            bg_interval = 1;
+            if(bg_num > bg_total_num){
+              bg_num = 0;
+            }
+            bg_element.style.backgroundImage = "url('bg/bg" + bg_num + ".jpg')"
+          }
+        }else{
+          bg_opacity = bg_opacity + bg_interval*0.5;
+          if(bg_opacity >= 80){
+            bg_interval = -1;
+            bg_stay_count = 1;
+          }
         }
+  
+        bg_element.style.opacity = (bg_opacity/100);
       }
-
-      bg_element.style.opacity = (bg_opacity/100);
     }
   </script>
 
@@ -55,10 +76,10 @@
         <a class="py-2" href="#">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
         </a>
-        <!--a class="py-2 d-none d-md-inline-block" href="#">Tour</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Product</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Features</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Enterprise</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">功能說明</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">授權取得</a>
+        <a class="py-2 d-none d-md-inline-block" href="#">錄音花絮</a>
+        <!--a class="py-2 d-none d-md-inline-block" href="#">Enterprise</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Support</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
         <a class="py-2 d-none d-md-inline-block" href="#">Cart</a-->
@@ -68,8 +89,8 @@
     <div class="main-bg" id="bg_div"></div>
     <div class="overflow-hidden p-3 p-md-5 text-center" id="main-recorder" style="height: 100%;">
       <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal" style="font-size: 2.5rem; font-family: Microsoft JhengHei;">台聲語音-臺灣之聲</h1>
-        <p id="info_start" >請按下"record"開始錄音,按下"stop"停止錄音並辨識</p>
+        <h1 class="display-4 font-weight-normal" style="font-size: 2.5rem; font-family: Microsoft JhengHei; background-color: #ffffff55; border-radius: 1.5vw">台聲語音-臺灣之聲</h1>
+        <p id="info_start" style=" background-color: #ffffff55; border-radius: 1.5vw">請按下"record"開始錄音,按下"stop"停止錄音並辨識</p>
         <form id="output-result" role="form">
           <div class="form-group">
             <textarea id="outputSentence" class="form-control" rows="5" name="sentence">辨識結果</textarea>
